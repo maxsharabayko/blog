@@ -64,7 +64,9 @@ Paste this serialized GST_STRUCTURE:
 video/x-raw, format=(string)I420, width=(int)1920, height=(int)1080, framerate=(fraction)30/1, interlace-mode=(string)progressive
 ```
 
-The tool instantly displays it as an organized, collapsible tree showing each field with its type and value.
+The tool instantly parses and displays it as an interactive tree:
+
+{{< figure src="tool-video-example.png" caption="gst-struct-viewer parsing a video/x-raw capability structure">}}
 
 ### Handling Complex Nested Structures
 
@@ -74,7 +76,9 @@ gst-struct-viewer excels with deeply nested serialized structures common in real
 stats, type=(MyType)typeEnum1, substruct=(structure)[stats, state=(MyState)error, error=(ErrorCode)unsupported, metrics=(structure)[metrics, count=(gulong)10, ratio=(double)1.5;];];
 ```
 
-The tool parses the complex nesting and type annotations, letting you explore the hierarchy interactively instead of manually tracking brackets and semicolons.
+The tool parses the complex nesting and type annotations, letting you explore the hierarchy interactively:
+
+{{< figure src="tool-complex-example.png" caption="gst-struct-viewer parsing a complex nested structure with multiple type annotations">}}
 
 ## Why This Matters
 
