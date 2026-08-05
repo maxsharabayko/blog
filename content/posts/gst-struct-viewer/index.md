@@ -17,36 +17,34 @@ I've created **gst-struct-viewer**, a lightweight, browser-based tool that makes
 
 ## The Problem
 
-GStreamer uses `GST_STRUCTURE` objects to represent structured data—capabilities, properties, events, messages, and more. When you encounter these in logs, debug output, or your application, they often look like this:
+GStreamer uses `GST_STRUCTURE` objects to represent structured data—capabilities, properties, events, messages, and more. When serialized to strings for logging, debugging, or transport, they can look surprisingly complex.
+
+Here's a simple example:
 
 ```
-video/x-raw,format=(string)I420,width=(int)1920,height=(int)1080,framerate=(fraction)30/1
+video/x-raw, format=(string)I420, width=(int)1920, height=(int)1080, framerate=(fraction)30/1
 ```
 
-Or more complex nested structures:
+But real-world structures often look like this:
 
 ```
-GstCaps at 0x7f8b8c0a5f20:
- media_type: video/x-h264
- 
- Caps:
-   video/x-h264, stream-format=(string)avc, alignment=(string)au, level=(string)4, profile=(string)main, codec_data=(buffer)0142c01e
+stats, type=(MyType)typeEnum1, substruct=(structure)[stats, state=(MyState)error, error=(ErrorCode)unsupported, metrics=(structure)[metrics, count=(gulong)10, ratio=(double)1.5;];];
 ```
 
-**The challenge?** These strings are hard to parse visually, especially when they're deeply nested or contain special characters and escaping. You end up:
-- Manually counting parentheses and commas
-- Trying to track nested levels
-- Struggling with escaped characters
-- Wasting time on structure interpretation instead of solving real problems
+**The challenge?** These serialized string representations are hard to parse visually, especially when deeply nested with multiple type annotations and special escaping. You end up:
+- Manually tracking nested brackets and semicolons
+- Trying to understand type annotations like `(MyType)typeEnum1`
+- Struggling to navigate multiple levels of nested structures
+- Wasting time parsing strings instead of solving real problems
 
 ## The Solution: gst-struct-viewer
 
-**gst-struct-viewer** is a free, open-source web application that:
+**gst-struct-viewer** is a free, open-source web application that specializes in parsing and visualizing **serialized `GST_STRUCTURE` strings**. It:
 
-✅ **Parses GST_STRUCTURE strings** - Intelligently handles GStreamer escaping and nested structures  
-✅ **Renders interactive trees** - Collapsible/expandable hierarchy for easy navigation  
+✅ **Parses serialized GST_STRUCTURE strings** - Handles type annotations, nested structures, and GStreamer's serialization format  
+✅ **Renders interactive trees** - Collapsible/expandable hierarchy with type information  
 ✅ **No installation needed** - Runs entirely in your browser  
-✅ **Type-aware display** - Shows numbers, strings, and structures with appropriate formatting  
+✅ **Type-aware display** - Shows field names, values, and their GStreamer types  
 ✅ **Resilient parsing** - Handles edge cases and malformed input gracefully  
 
 ## How It Works
@@ -60,32 +58,23 @@ Using gst-struct-viewer is simple:
 
 ### Example: Video Capabilities
 
-Paste this GST_STRUCTURE:
+Paste this serialized GST_STRUCTURE:
 
 ```
 video/x-raw, format=(string)I420, width=(int)1920, height=(int)1080, framerate=(fraction)30/1, interlace-mode=(string)progressive
 ```
 
-The tool instantly displays it as an organized, collapsible tree:
-
-```
-🎬 video/x-raw
-  ├─ format: I420
-  ├─ width: 1920
-  ├─ height: 1080
-  ├─ framerate: 30/1
-  └─ interlace-mode: progressive
-```
+The tool instantly displays it as an organized, collapsible tree showing each field with its type and value.
 
 ### Handling Complex Nested Structures
 
-gst-struct-viewer excels with deeply nested structures common in real-world GStreamer applications:
+gst-struct-viewer excels with deeply nested serialized structures common in real-world GStreamer applications:
 
 ```
-audio/x-opus, channels=(int)2, channel-mask=(bitmask)0x0000000000000003, rate=(int)48000, stream-format=(string)ogg
+stats, type=(MyType)typeEnum1, substruct=(structure)[stats, state=(MyState)error, error=(ErrorCode)unsupported, metrics=(structure)[metrics, count=(gulong)10, ratio=(double)1.5;];];
 ```
 
-No more manual parsing—just paste, click, and explore!
+The tool parses the complex nesting and type annotations, letting you explore the hierarchy interactively instead of manually tracking brackets and semicolons.
 
 ## Why This Matters
 
@@ -123,10 +112,13 @@ Built with modern web technologies:
 - **Responsive Design** - Works on desktop and mobile
 
 The parser is carefully engineered to handle:
-- GStreamer escaping conventions (`\,`, `\=`, `\"`)
-- Nested structures and quoted content
-- Multiple pass unescaping for complex cases
-- Graceful fallback for edge cases
+- GStreamer serialization format with type annotations (e.g., `(string)`, `(int)`, `(MyType)`)
+- Nested structures enclosed in brackets `[...]`
+- Semicolon-delimited nested structure terminators
+- Field names and values according to GStreamer's `GST_STRUCTURE` spec
+- Graceful fallback for edge cases and malformed input
+
+For details on the `GST_STRUCTURE` serialization format, see the [GStreamer documentation](https://gstreamer.freedesktop.org/documentation/gstreamer/gststructure.html).
 
 ## Community & Contributions
 
