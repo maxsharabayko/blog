@@ -3,4 +3,7 @@
 * https://discourse.gohugo.io/t/creating-static-content-that-uses-partials/265/19
 
 
-To build just run `hugo` from the top-level directory.
+## To build
+
+1. Clone the repo and submodules (mainroad theme).
+2. Run `hugo` from the top-level directory.
