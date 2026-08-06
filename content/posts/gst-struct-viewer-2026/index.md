@@ -1,5 +1,5 @@
 ---
-title: "Introducing gst-struct-viewer: Visualize GStreamer Structures Online"
+title: "gst-struct-viewer: Visualize GStreamer Structures Online"
 date: 2026-08-06
 draft: false
 category: "GStreamer"
