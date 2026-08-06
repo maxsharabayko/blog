@@ -1,5 +1,5 @@
 baseURL = "https://maxsharabayko.github.io/blog/"
-languageCode = "en-us"
+locale = "en-us"
 title = "Max Sharabayko Blog"
 theme = "mainroad"
 disqusShortname = "https-maxsharabayko-github-io-blog" # Enable Disqus comments
@@ -35,7 +35,7 @@ disqusShortname = "https-maxsharabayko-github-io-blog" # Enable Disqus comments
   #single = false # Configure layout for single pages
   single = "right" # Configure layout for single pages
   # Enable widgets in given order
-  widgets = ["search", "recent", "categories", "taglist", "social", "languages"]
+  widgets = ["search", "recent", "categories", "taglist", "social"]
   
 [Params.widgets.social]
   # Enable parts of social widget
@@ -47,6 +47,11 @@ disqusShortname = "https-maxsharabayko-github-io-blog" # Enable Disqus comments
   #gitlab = "username"
   #bitbucket = "username"
   #email = "example@example.com"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
   
 [menu]
 
