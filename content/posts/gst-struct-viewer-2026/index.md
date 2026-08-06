@@ -1,6 +1,6 @@
 ---
 title: "Introducing gst-struct-viewer: Visualize GStreamer Structures Online"
-date: 2026-08-05
+date: 2026-08-06
 draft: false
 category: "GStreamer"
 tags: ["GStreamer", "Visualization", "Developer Tools", "Open Source"]
@@ -28,7 +28,35 @@ video/x-raw, format=(string)I420, width=(int)1920, height=(int)1080, framerate=(
 More complex structures may look like this:
 
 ```
-stats, source=(structure)[stats, num-packets=(guint64)5120, num-bytes=(guint64)7340032, bitrate-bps=(guint64)2800000, type=(IngestSourceType)network, state=(ConnectionState)connected, ingress=(structure)[stats, session=(structure)< [sessionStats, reconnects=(uint)0, attempts=(uint)1, protocol=(string)udp, mode=(string)unicast, handshake-state=(string)complete, endpoint-id=(string)"edge-a1", tags=(string)"region=west,priority=high", links=(structure)< [linkStats, loss-rate=(double)0.0002, jitter-ms=(double)0.41000000000000003, rtt-ms=(double)1.72, local-port=(int)51000, remote-port=(int)5000, local-address=(string)192.168.10.21, remote-address=(string)192.168.10.42, encryption=(string)aes-gcm, auth-state=(string)verified, link-state=(string)running, transport=(structure)[transportStats, mtu-bytes=(int)1400, rx-pps=(double)3100.25, tx-pps=(double)2998.75, rx-retrans=(guint64)12, tx-retrans=(guint64)8, rx-dropped=(guint64)2, tx-dropped=(guint64)0, rx-queue-bytes=(guint64)65536, tx-queue-bytes=(guint64)32768, congestion-window=(uint)64, pacing-enabled=(boolean)true;];] >;] >;];], demux=(structure)[stats, delay-ms=(int)12, container=(string)mpegts, timeline=(structure)[timeline, pcr-pid=(uint)100, pcr-jitter-us=(guint64)240, discontinuities=(guint64)0, programs=(structure){ [program, program-number=(uint)1, pmt-pid=(uint)200, streams=(structure){ [stream, pid=(uint)101, stream-type=(uint)27, stream-type-name=(string)"Video\ H.264", language=(string)und;], [stream, pid=(uint)102, stream-type=(uint)15, stream-type-name=(string)"Audio\ AAC", language=(string)eng;], [stream, pid=(uint)103, stream-type=(uint)6, stream-type-name=(string)"Data\ Private", language=(string)und;] };] };];], processor=(structure)[stats, video=(structure)[stats, state=(ComponentState)running, error=(ErrorCode)none, info=(structure)[info, codec=(string)H.264/AVC, profile=(string)high, level=(string)4.1, chroma-format=(string)4:2:0, width=(int)1920, height=(int)1080, framerate=(fraction)30000/1001, interlaced=(boolean)false;], metrics=(structure)[metrics, input-packets=(guint64)4100, output-frames=(guint64)4075, dropped-frames=(guint64)3, late-frames=(guint64)1, avg-decode-ms=(double)1.2300000000000000, buffer-level-ms=(uint)48;];], audio=(structure)[stats, state=(ComponentState)running, error=(ErrorCode)none, info=(structure)[info, codec=(string)"AAC-LC", sample-rate=(int)48000, channels=(int)2, layout=(string)stereo;], metrics=(structure)[metrics, input-packets=(guint64)8900, output-frames=(guint64)8896, dropped-frames=(guint64)0, avg-decode-ms=(double)0.21000000000000002, buffer-level-ms=(uint)36;];], metadata=(structure)[stats, cue-points=(guint64)24, id3-tags=(guint64)12, scte35-events=(guint64)3, last-event-type=(string)splice_insert;];], sink=(structure)[stats, type=(OutputSinkType)stream-distributor, video=(structure)[stats, state=(SinkState)running, error=(ErrorCode)none, metrics=(structure)[metrics, frames-sent=(guint64)4072, frames-skipped=(guint64)2, send-rate-fps=(double)29.965000000000000, queue-depth-frames=(uint)4;];], audio=(structure)[stats, state=(SinkState)running, error=(ErrorCode)none, metrics=(structure)[metrics, frames-sent=(guint64)8896, frames-skipped=(guint64)0, queue-depth-frames=(uint)6;];], monitoring=(structure)[stats, alarms-active=(uint)1, alarm-list=(string)"link_jitter_warning", health-score=(double)0.9820000000000000;];];
+stats, source=(structure)[stats, num-packets=(guint64)5120, num-bytes=(guint64)7340032, bitrate-bps=(guint64)2800000, \
+    type=(IngestSourceType)network, state=(ConnectionState)connected, ingress=(structure)[stats, \
+	session=(structure)< [sessionStats, reconnects=(uint)0, attempts=(uint)1, protocol=(string)udp, mode=(string)unicast, \
+	handshake-state=(string)complete, endpoint-id=(string)"edge-a1", tags=(string)"region=west,priority=high", \
+	links=(structure)< [linkStats, loss-rate=(double)0.0002, jitter-ms=(double)0.41000000000000003, rtt-ms=(double)1.72, \
+	local-port=(int)51000, remote-port=(int)5000, local-address=(string)192.168.10.21, remote-address=(string)192.168.10.42, \
+	encryption=(string)aes-gcm, auth-state=(string)verified, link-state=(string)running, transport=(structure)[transportStats, \
+	mtu-bytes=(int)1400, rx-pps=(double)3100.25, tx-pps=(double)2998.75, rx-retrans=(guint64)12, tx-retrans=(guint64)8, \
+	rx-dropped=(guint64)2, tx-dropped=(guint64)0, rx-queue-bytes=(guint64)65536, tx-queue-bytes=(guint64)32768, congestion-window=(uint)64,\
+	pacing-enabled=(boolean)true;];] >;] >;];], demux=(structure)[stats, delay-ms=(int)12, container=(string)mpegts, \
+	timeline=(structure)[timeline, pcr-pid=(uint)100, pcr-jitter-us=(guint64)240, discontinuities=(guint64)0, \
+	programs=(structure){ [program, program-number=(uint)1, pmt-pid=(uint)200, streams=(structure){ [stream, pid=(uint)101, \
+	stream-type=(uint)27, stream-type-name=(string)"Video\ H.264", language=(string)und;], [stream, pid=(uint)102, stream-type=(uint)15, \
+	stream-type-name=(string)"Audio\ AAC", language=(string)eng;], [stream, pid=(uint)103, stream-type=(uint)6, \
+	stream-type-name=(string)"Data\ Private", language=(string)und;] };] };];], processor=(structure)[stats, \
+	video=(structure)[stats, state=(ComponentState)running, error=(ErrorCode)none, info=(structure)[info, codec=(string)H.264/AVC, \
+	profile=(string)high, level=(string)4.1, chroma-format=(string)4:2:0, width=(int)1920, height=(int)1080, framerate=(fraction)30000/1001,\
+	interlaced=(boolean)false;], metrics=(structure)[metrics, input-packets=(guint64)4100, output-frames=(guint64)4075, \
+	dropped-frames=(guint64)3, late-frames=(guint64)1, avg-decode-ms=(double)1.2300000000000000, buffer-level-ms=(uint)48;];], \
+	audio=(structure)[stats, state=(ComponentState)running, error=(ErrorCode)none, info=(structure)[info, codec=(string)"AAC-LC", \
+	sample-rate=(int)48000, channels=(int)2, layout=(string)stereo;], metrics=(structure)[metrics, input-packets=(guint64)8900, \
+	output-frames=(guint64)8896, dropped-frames=(guint64)0, avg-decode-ms=(double)0.21000000000000002, buffer-level-ms=(uint)36;];], \
+	metadata=(structure)[stats, cue-points=(guint64)24, id3-tags=(guint64)12, scte35-events=(guint64)3, \
+	last-event-type=(string)splice_insert;];], sink=(structure)[stats, type=(OutputSinkType)stream-distributor, \
+	video=(structure)[stats, state=(SinkState)running, error=(ErrorCode)none, metrics=(structure)[metrics, frames-sent=(guint64)4072, \
+	frames-skipped=(guint64)2, send-rate-fps=(double)29.965000000000000, queue-depth-frames=(uint)4;];], audio=(structure)[stats, \
+	state=(SinkState)running, error=(ErrorCode)none, metrics=(structure)[metrics, frames-sent=(guint64)8896, frames-skipped=(guint64)0, \
+	queue-depth-frames=(uint)6;];], monitoring=(structure)[stats, alarms-active=(uint)1, alarm-list=(string)"link_jitter_warning", \
+	health-score=(double)0.9820000000000000;];];
 ```
 
 **The challenge?** These serialized string representations are hard to parse visually, especially when deeply nested with multiple type annotations and special escaping. You end up:
@@ -100,8 +128,7 @@ Whether you're:
 ## Try It Now
 
 The tool is deployed and ready to use right now:
-
-🔗 **[gst-struct-viewer](https://maxsharabayko.github.io/gst-struct-viewer/)**
+🔗 **[gst-struct-viewer online](https://maxsharabayko.github.io/gst-struct-viewer/)**
 
 ## Technical Details
 
